@@ -7,7 +7,7 @@ namespace Ordering.Application.Features.Orders.Commands.CheckoutOrder
         public CheckoutOrderCommandValidator()
         {
             RuleFor(p => p.UserName)
-                .Empty().WithMessage("{UserName} is required.")
+                .NotEmpty().WithMessage("{UserName} is required.")
                 .NotNull()
                 .MaximumLength(50).WithMessage("{UserName} must not exceed 50 characters");
 
