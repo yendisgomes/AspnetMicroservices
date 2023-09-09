@@ -1,12 +1,8 @@
-﻿using Microsoft.Extensions.Hosting;
-using Serilog.Sinks.Elasticsearch;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Sinks.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 
 namespace Common.Logging
 {

@@ -1,5 +1,5 @@
 ﻿using Discount.API.Entities;
-using Discount.API.Repositories;
+using Discount.API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
@@ -17,17 +17,17 @@ namespace Discount.API.Controllers
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
-
+        
         [HttpGet("{productName}", Name = "GetDiscount")]
         [ProducesResponseType(typeof(Coupon), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Coupon>> GetDiscount(string productName)
         {
-            var coupon = await _repository.GetDiscount(productName);
-            return Ok(coupon);
+            var discount = await _repository.GetDiscount(productName);
+            return Ok(discount);
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(Coupon), (int)HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(Coupon), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Coupon>> CreateDiscount([FromBody] Coupon coupon)
         {
             await _repository.CreateDiscount(coupon);
@@ -36,7 +36,7 @@ namespace Discount.API.Controllers
 
         [HttpPut]
         [ProducesResponseType(typeof(Coupon), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Coupon>> UpdateDiscount([FromBody] Coupon coupon)
+        public async Task<ActionResult<Coupon>> UpdateBasket([FromBody] Coupon coupon)
         {
             return Ok(await _repository.UpdateDiscount(coupon));
         }

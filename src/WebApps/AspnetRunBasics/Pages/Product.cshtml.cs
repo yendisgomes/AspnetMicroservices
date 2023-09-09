@@ -6,7 +6,6 @@ using AspnetRunBasics.Models;
 using AspnetRunBasics.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.VisualBasic;
 
 namespace AspnetRunBasics
 {
@@ -33,7 +32,7 @@ namespace AspnetRunBasics
             var productList = await _catalogService.GetCatalog();
             CategoryList = productList.Select(p => p.Category).Distinct();
 
-            if (!string.IsNullOrEmpty(categoryName))
+            if (!string.IsNullOrWhiteSpace(categoryName))
             {
                 ProductList = productList.Where(p => p.Category == categoryName);
                 SelectedCategory = categoryName;
@@ -49,6 +48,7 @@ namespace AspnetRunBasics
         public async Task<IActionResult> OnPostAddToCartAsync(string productId)
         {
             var product = await _catalogService.GetCatalog(productId);
+
             var userName = "swn";
             var basket = await _basketService.GetBasket(userName);
 

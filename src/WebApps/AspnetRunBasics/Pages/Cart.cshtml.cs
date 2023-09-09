@@ -17,12 +17,12 @@ namespace AspnetRunBasics
             _basketService = basketService ?? throw new ArgumentNullException(nameof(basketService));
         }
 
-        public BasketModel Cart { get; set; } = new BasketModel();        
+        public BasketModel Cart { get; set; } = new BasketModel();
 
         public async Task<IActionResult> OnGetAsync()
         {
             var userName = "swn";
-            Cart = await _basketService.GetBasket(userName);            
+            Cart = await _basketService.GetBasket(userName);
 
             return Page();
         }

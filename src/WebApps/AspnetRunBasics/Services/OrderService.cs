@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using AspnetRunBasics.Extensions;
+using AspnetRunBasics.Models;
+using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System;
-using AspnetRunBasics.Models;
-using AspnetRunBasics.Extensions;
 
 namespace AspnetRunBasics.Services
 {

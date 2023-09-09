@@ -32,13 +32,13 @@ namespace Shopping.Aggregator.Controllers
             {
                 var product = await _catalogService.GetCatalog(item.ProductId);
 
+                // set additional product fields
                 item.ProductName = product.Name;
                 item.Category = product.Category;
                 item.Summary = product.Summary;
                 item.Description = product.Description;
                 item.ImageFile = product.ImageFile;
-
-            }
+            }            
 
             var orders = await _orderService.GetOrdersByUserName(userName);
 
@@ -48,8 +48,9 @@ namespace Shopping.Aggregator.Controllers
                 BasketWithProducts = basket,
                 Orders = orders
             };
-
+            
             return Ok(shoppingModel);
         }
+
     }
 }

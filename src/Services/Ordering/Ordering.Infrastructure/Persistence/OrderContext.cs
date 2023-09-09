@@ -2,9 +2,6 @@
 using Ordering.Domain.Common;
 using Ordering.Domain.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,7 +15,7 @@ namespace Ordering.Infrastructure.Persistence
 
         public DbSet<Order> Orders { get; set; }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<EntityBase>())
             {
@@ -34,7 +31,6 @@ namespace Ordering.Infrastructure.Persistence
                         break;
                 }
             }
-
             return base.SaveChangesAsync(cancellationToken);
         }
     }

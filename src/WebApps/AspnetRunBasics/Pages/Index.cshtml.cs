@@ -15,8 +15,8 @@ namespace AspnetRunBasics.Pages
 
         public IndexModel(ICatalogService catalogService, IBasketService basketService)
         {
-            _catalogService = catalogService;
-            _basketService = basketService;
+            _catalogService = catalogService ?? throw new ArgumentNullException(nameof(catalogService));
+            _basketService = basketService ?? throw new ArgumentNullException(nameof(basketService));
         }
 
         public IEnumerable<CatalogModel> ProductList { get; set; } = new List<CatalogModel>();
@@ -30,10 +30,11 @@ namespace AspnetRunBasics.Pages
         public async Task<IActionResult> OnPostAddToCartAsync(string productId)
         {
             var product = await _catalogService.GetCatalog(productId);
+
             var userName = "swn";
             var basket = await _basketService.GetBasket(userName);
 
-            basket.Items.Add(new BasketItemModel 
+            basket.Items.Add(new BasketItemModel
             {
                 ProductId = productId,
                 ProductName = product.Name,
@@ -43,7 +44,6 @@ namespace AspnetRunBasics.Pages
             });
 
             var basketUpdated = await _basketService.UpdateBasket(basket);
-
             return RedirectToPage("Cart");
         }
     }
